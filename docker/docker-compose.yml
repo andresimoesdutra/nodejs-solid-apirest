@@ -1,0 +1,11 @@
+services:
+  develop:
+    container_name: 'crud-solid'
+    image: 'mysql:latest'
+    environment:
+      - 'MYSQL_USER=user'
+      - 'MYSQL_PASSWORD=12345'
+      - 'MYSQL_ROOT_PASSWORD=12345'
+      - 'MYSQL_DATABASE=appdb'
+    ports:
+      - '3306:3306'
