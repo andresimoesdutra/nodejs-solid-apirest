@@ -1,12 +1,14 @@
 import { User } from "../../entity/User";
 import { IMailProvider } from "../../providers/IMailProvider";
+import { PasswordEncoder } from "../../providers/implementations/PasswordEncoderProvider";
 import { UserRepository } from "../../repositories/implementations/UserRepository";
 import { ICreateUserRequestDTO } from "./CreateUserDTO";
 
 export class CreateUserUseCase {
     constructor(
         private usersRepository: UserRepository,
-        private mailProvider: IMailProvider
+        private passwordEncoder: PasswordEncoder,
+        private mailProvider: IMailProvider,
     ) { }
 
     async execute(data: ICreateUserRequestDTO) {
@@ -19,7 +21,7 @@ export class CreateUserUseCase {
         const user = new User();
         user.username = data.username;
         user.email = data.email;
-        user.password = data.password;
+        user.password = this.passwordEncoder.encode(data.password);
 
         await this.usersRepository.save(user)
 
