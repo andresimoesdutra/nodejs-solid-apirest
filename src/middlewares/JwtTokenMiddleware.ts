@@ -60,7 +60,7 @@ export class JwtTokenMiddleware {
         const decodedToken = this.jwtProvider.decode(token);
         const user = await this.userRepository.findByEmail(decodedToken.email);
 
-        if (user.role !== UserRoleEnum.premium) {
+        if (user.role !== UserRoleEnum.premium || UserRoleEnum.admin) {
             return res.status(401).json({
                 message: "Not authorized to access this endpoint."
             });
