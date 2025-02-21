@@ -1,6 +1,7 @@
 import { User } from "../entity/User";
 
 export interface IJwtProvider {
-    generateToken(user: User): string;
-    verifyToken(token: string): Promise<boolean>;
+    sign(user: User): string;
+    decode(token: string): string;
+    verifyToken(token: string): boolean;
 }

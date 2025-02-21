@@ -1,6 +1,7 @@
 import { User } from "../../entity/User";
 import { IMailProvider } from "../../providers/IMailProvider";
 import { PasswordEncoder } from "../../providers/implementations/PasswordEncoderProvider";
+import { VerificationCode } from "../../providers/implementations/VerificationCodeProvider";
 import { UserRepository } from "../../repositories/implementations/UserRepository";
 import { ICreateUserRequestDTO } from "./CreateUserDTO";
 
@@ -8,6 +9,7 @@ export class CreateUserUseCase {
     constructor(
         private usersRepository: UserRepository,
         private passwordEncoder: PasswordEncoder,
+        private verificationCode: VerificationCode,
         private mailProvider: IMailProvider,
     ) { }
 
@@ -22,6 +24,7 @@ export class CreateUserUseCase {
         user.username = data.username;
         user.email = data.email;
         user.password = this.passwordEncoder.encode(data.password);
+        user.verificationCode = this.verificationCode.generate();
 
         await this.usersRepository.save(user)
 
@@ -34,8 +37,8 @@ export class CreateUserUseCase {
                 username: "Equipe Auvexis",
                 email: "auvexis@gmail.com"
             },
-            subject: "Verifique o seu email",
-            body: "<h1>Verifique o seu email para continuar usando o nosso app!</h1>"
+            subject: `Olá ${data.username}, verifique o seu email!`,
+            body: `<h1>Código de verificação: ${user.verificationCode}</h1>`
         });
     }
 }

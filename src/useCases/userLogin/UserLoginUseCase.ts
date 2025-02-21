@@ -11,7 +11,7 @@ export class UserLoginUseCase {
     ) { }
 
 
-    async execute(data: IUserLoginRequestDTO) {
+    async execute(data: IUserLoginRequestDTO): Promise<string> {
         const user = await this.userRepository.findByEmail(data.email);
 
         if (!user) {
@@ -27,7 +27,7 @@ export class UserLoginUseCase {
             throw new Error("Incorrect Password.");
         }
 
-        const token = this.jwtProvider.generateToken(user);
+        const token = this.jwtProvider.sign(user);
 
         return token;
     }

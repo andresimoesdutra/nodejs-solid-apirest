@@ -1,6 +1,3 @@
-import { Repository } from "typeorm";
-import { AppDataSource } from "../../data-source";
-import { User } from "../../entity/User";
 import { JwtProvider } from "../../providers/implementations/JwtProvider";
 import { PasswordEncoder } from "../../providers/implementations/PasswordEncoderProvider";
 import { UserLoginController } from "./UserLoginController";

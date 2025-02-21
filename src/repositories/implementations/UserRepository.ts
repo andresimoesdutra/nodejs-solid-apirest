@@ -11,15 +11,17 @@ export class UserRepository implements IUsersRepository {
     }
 
     async save(user: User): Promise<void> {
-        const userAlreadyExistByUsername = await this.userRepository.findOneBy({ username: user.username });
-        const userAlreadyExistByEmail = await this.userRepository.findOneBy({ email: user.email });
+        if (!user.id) {
+            const userAlreadyExistByUsername = await this.userRepository.findOneBy({ username: user.username });
+            const userAlreadyExistByEmail = await this.userRepository.findOneBy({ email: user.email });
 
-        if (userAlreadyExistByUsername) {
-            throw new Error("User with this username already exists.");
-        }
+            if (userAlreadyExistByUsername) {
+                throw new Error("User with this username already exists.");
+            }
 
-        if (userAlreadyExistByEmail) {
-            throw new Error("User with this email already exists.");
+            if (userAlreadyExistByEmail) {
+                throw new Error("User with this email already exists.");
+            }
         }
 
         await this.userRepository.save(user);
@@ -31,4 +33,7 @@ export class UserRepository implements IUsersRepository {
         return user;
     }
 
+    async findAll(): Promise<User[]> {
+        return await this.userRepository.find();
+    }
 }
