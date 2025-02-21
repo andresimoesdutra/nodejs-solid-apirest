@@ -18,7 +18,7 @@ router.post("/auth/email/verify", (req: Request, res: Response) => {
     return emailVerificationController.handle(req, res);
 })
 
-router.get("/user/list", jwtTokenMiddleware.verify.bind(jwtTokenMiddleware), async (req: Request, res: Response, next: NextFunction) => {
+router.get("/user/list", jwtTokenMiddleware.authUser.bind(jwtTokenMiddleware), async (req: Request, res: Response, next: NextFunction) => {
     return await userListController.handle(req, res);
 });
 

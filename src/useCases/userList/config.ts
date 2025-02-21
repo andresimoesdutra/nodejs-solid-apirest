@@ -5,8 +5,9 @@ import { UserListController } from "./UserListController";
 import { UserListUseCase } from "./UserListUseCase";
 
 const jwtProvider = new JwtProvider();
-const jwtTokenMiddleware = new JwtTokenMiddleware(jwtProvider);
 const userRepository = new UserRepository();
+const jwtTokenMiddleware = new JwtTokenMiddleware(jwtProvider, userRepository);
+
 const userListUseCase = new UserListUseCase(userRepository);
 const userListController = new UserListController(userListUseCase);
 
