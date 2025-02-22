@@ -27,6 +27,10 @@ export class UserLoginUseCase {
             throw new Error("Incorrect Password.");
         }
 
+        if (!user.isEmailVerified) {
+            throw new Error("Please verify your email before logging in.")
+        }
+
         const token = this.jwtProvider.sign(user);
 
         return token;

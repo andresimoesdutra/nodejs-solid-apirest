@@ -24,7 +24,9 @@ export class CreateUserUseCase {
         user.username = data.username;
         user.email = data.email;
         user.password = this.passwordEncoder.encode(data.password);
+        user.role = data.role;
         user.verificationCode = this.verificationCode.generate();
+
 
         await this.usersRepository.save(user)
 
