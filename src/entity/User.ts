@@ -1,4 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from "typeorm"
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export enum UserRoleEnum {
     admin = "admin",
@@ -8,7 +11,7 @@ export enum UserRoleEnum {
 }
 
 @Entity({
-    name: "users_tb"
+    name: process.env.TYPEORM_USER_TABLE_NAME as string
 })
 export class User {
     @PrimaryGeneratedColumn()
@@ -22,11 +25,6 @@ export class User {
 
     @Column()
     password: string
-
-    @Column({
-        nullable: true
-    })
-    imageUrl: string
 
     @Column({
         type: "enum",

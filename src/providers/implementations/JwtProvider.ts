@@ -4,9 +4,10 @@ import jwt, { JwtPayload } from "jsonwebtoken"
 import dotenv from "dotenv";
 import { prependOnceListener } from "process";
 
+dotenv.config();
+
 export class JwtProvider implements IJwtProvider {
     sign(user: User): string {
-        dotenv.config();
 
         const token = jwt.sign(
             {
@@ -15,11 +16,11 @@ export class JwtProvider implements IJwtProvider {
                 email: user.email,
                 role: user.role
             },
-            process.env.JWT_SECRET,
+            process.env.JWT_SECRET as string, // Certifique-se de que essa variável está definida
             {
-                expiresIn: "7d",
-                subject: "auth",
-                issuer: "backend"
+                expiresIn: "5m",
+                subject: user.email,
+                issuer: process.env.JWT_ISSUER ?? "my-app"
             }
         );
 

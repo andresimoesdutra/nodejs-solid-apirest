@@ -6,19 +6,19 @@ import { emailVerificationController } from "./useCases/userEmailVerification/co
 
 const router = Router();
 
-router.post("/auth/create", (req: Request, res: Response) => {
+router.post("/api/auth/create", (req: Request, res: Response) => {
     return createUserController.handle(req, res);
 });
 
-router.post("/auth/login", (req: Request, res: Response) => {
+router.post("/api/auth/login", (req: Request, res: Response) => {
     return userLoginController.handle(req, res);
 });
 
-router.post("/auth/email/verify", (req: Request, res: Response) => {
+router.post("/api/auth/email/verify", (req: Request, res: Response) => {
     return emailVerificationController.handle(req, res);
 })
 
-router.get("/user/list", jwtTokenMiddleware.authUser.bind(jwtTokenMiddleware), async (req: Request, res: Response) => {
+router.get("/api/find/user/list", jwtTokenMiddleware.authUser.bind(jwtTokenMiddleware), async (req: Request, res: Response) => {
     return await userListController.handle(req, res);
 });
 

@@ -3,20 +3,12 @@ import { AppDataSource } from "./data-source";
 import { User, UserRoleEnum } from "./entity/User";
 import { PasswordEncoder } from "./providers/implementations/PasswordEncoderProvider";
 import { UserRepository } from "./repositories/implementations/UserRepository";
+import dotenv from "dotenv";
 
-AppDataSource.initialize().then(async () => {
-    const userRepository = new UserRepository();
-    const passwordEncoder = new PasswordEncoder();
+dotenv.config();
 
-    const user = new User();
-    user.username = "admin";
-    user.email = "admin@gmail.com";
-    user.password = passwordEncoder.encode("admin");
-    user.isEmailVerified = true;
-    user.verificationCode = null;
-    user.role = UserRoleEnum.admin;
+AppDataSource.initialize();
 
-    await userRepository.save(user);
+app.listen(process.env.EXPRESS_SERVER_PORT, () => {
+    console.log(`\n- Server is running on: http://localhost:${process.env.EXPRESS_SERVER_PORT}/ \n`);
 });
-
-app.listen(8023, () => console.log("\n- Server is running on: http://localhost:8023/ \n"));
