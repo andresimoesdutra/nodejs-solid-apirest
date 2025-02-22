@@ -8,9 +8,7 @@ export class EmailVerificationUseCase {
         private userRepository: UserRepository
     ) { }
 
-    async execute(req: Request, res: Response) {
-        const { email, code } = req.body;
-
+    async execute(email: string, code: string) {
         const user = await this.userRepository.findByEmail(email);
 
         if (!user) {

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { EmailVerificationUseCase } from "./emailVerificationUseCase";
+import { EmailVerificationUseCase } from "./EmailVerificationUseCase";
 
 export class EmailVerificationController {
     constructor(
@@ -7,10 +7,12 @@ export class EmailVerificationController {
     ) { }
 
     async handle(req: Request, res: Response): Promise<Response> {
+        const { email, code } = req.body;
+
         try {
             await this.emailVerificationUseCase.execute(
-                req,
-                res
+                email,
+                code
             );
 
             return res.status(200).send();
