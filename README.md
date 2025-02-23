@@ -68,7 +68,7 @@ Foi um ótimo aprendizado, pois pude ver de perto como essas práticas melhoram 
 # Uso:
 ### 1. Rodar o servidor:
 ```sh
- npm run dev
+ npm start
 ```
 
 ### 2. A API estará acessível em:

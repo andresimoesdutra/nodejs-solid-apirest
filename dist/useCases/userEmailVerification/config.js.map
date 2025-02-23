@@ -1,0 +1,1 @@
+{"version":3,"file":"config.js","sourceRoot":"","sources":["../../../src/useCases/userEmailVerification/config.ts"],"names":[],"mappings":";;;AAAA,+EAA4E;AAC5E,sFAAmF;AACnF,yEAAsE;AAEtE,MAAM,cAAc,GAAG,IAAI,+BAAc,EAAE,CAAC;AAC5C,MAAM,wBAAwB,GAAG,IAAI,mDAAwB,CAAC,cAAc,CAAC,CAAC;AAC9E,MAAM,2BAA2B,GAAG,IAAI,yDAA2B,CAAC,wBAAwB,CAAC,CAAC;AAErF,kEAA2B"}
