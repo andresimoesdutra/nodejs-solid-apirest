@@ -61,7 +61,7 @@ Foi um ótimo aprendizado, pois pude ver de perto como essas práticas melhoram 
 ```
 
 ### 4. Configurar as variáveis de ambiente no arquivo .env
-![alt text](image-1.png)
+![image](https://github.com/user-attachments/assets/d8b8423a-3461-4eb8-a7c1-18c9cc4c71e2)
 
 ##
 
