@@ -39,36 +39,6 @@ export class JwtTokenMiddleware {
         next();
     }
 
-    async authPremium(req: Request, res: Response, next: NextFunction) {
-        const authHeader = req.headers.authorization;
-
-        if (!authHeader || !authHeader.startsWith("Bearer ")) {
-            return res.status(401).json({
-                message: "Invalid Token"
-            });
-        }
-
-        const token = authHeader.replace("Bearer ", "");
-        const verifyToken = this.jwtProvider.verifyToken(token);
-
-        if (!verifyToken) {
-            return res.status(401).json({
-                message: "Invalid Token"
-            });
-        }
-
-        const decodedToken = this.jwtProvider.decode(token);
-        const user = await this.userRepository.findByEmail(decodedToken.email);
-
-        if (user.role !== UserRoleEnum.premium || UserRoleEnum.admin) {
-            return res.status(401).json({
-                message: "Not authorized to access this endpoint."
-            });
-        }
-
-        next();
-    }
-
     async authAdmin(req: Request, res: Response, next: NextFunction) {
         const authHeader = req.headers.authorization;
 

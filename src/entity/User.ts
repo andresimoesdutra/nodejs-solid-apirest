@@ -5,7 +5,6 @@ dotenv.config();
 
 export enum UserRoleEnum {
     admin = "admin",
-    premium = "premium",
     user = "user",
     reader = "reader"
 }
